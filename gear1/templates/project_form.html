@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Posts
+{% endblock %}
+
+{% block content %}
+
+<!-- Add background image -->
+<div class="relative bg-cover bg-center" style="background-image: url('/static/media/bg_image_create.png'); min-height: 100vh;"> 
+<div class="bg-cover bg-center" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/static/media/bg_image_create.png'); min-height: 100vh;">
+
+  <!-- Heading -->
+  <h1 class="mb-4 text-4xl text-center font-extrabold leading-none tracking-tight text-white-900 md:text-5xl lg:text-6xl dark:text-white">
+    The World of Projects is here
+  </h1>
+
+  <!-- Description -->
+  <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+    Seamless journey of projects. Start filling the form with participant number along with a brief description and attach project link/video.
+  </p>
+
+  <!-- Form Section -->
+  <h2>
+    {% if form.instance.pk %} 
+      <h3 class="mb-4 text-4xl text-center font-extrabold leading-none tracking-tight text-white-900 md:text-5xl lg:text-6xl dark:text-white">Edit Now</h3>
+    {% else %}
+      <h3 class="mb-4 text-4xl text-center font-extrabold leading-none tracking-tight text-white-900 md:text-5xl lg:text-6xl dark:text-white">Manage your posts</h3>
+    {% endif %}
+
+    <!-- Form -->
+    <form method="post" enctype="multipart/form-data" class="form max-w-lg mx-auto">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="text-center">
+        <button class="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded" type="submit">
+          Submit
+        </button>
+      </div>
+    </form>
+    
+    <!-- Back to Tweet List Link (Blue, Underlined) -->
+    <div class="mt-6 text-center">
+      <a href="{% url 'proj_list' %}" class="text-white-600 underline hover:text-white-800">
+        Back to Tweet List
+      </a>
+    </div>
+  </h2>
+
+</div>
+
+{% endblock %}
